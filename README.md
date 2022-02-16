@@ -6,6 +6,12 @@ So that I can see the bookmarks I have
 I would like to see a list of all saved bookmarks
 ```
 
+```
+As a user
+So that I can save websites I visit frequently
+I would like to add new bookmarks
+```
+
 ![Class Model](/public/ClassModel.png)
 
 ![Domain Model](/public/DomainModel.png)
