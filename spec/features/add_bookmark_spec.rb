@@ -6,8 +6,7 @@ feature "Add bookmark" do
     fill_in :title, with: 'google website'
     click_on 'Add'
 
-    expect(page).to have_content("http://www.google.com")
-    expect(page).to have_content("google website")
+    expect(page).to have_link('google website', href: 'http://www.google.com')
   end
 
 end

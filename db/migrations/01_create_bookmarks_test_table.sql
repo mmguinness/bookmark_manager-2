@@ -1,0 +1,1 @@
+CREATE TABLE bookmarks_test(id SERIAL PRIMARY KEY, url VARCHAR(60));

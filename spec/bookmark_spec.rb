@@ -16,4 +16,13 @@ describe Bookmark do
       expect(bookmarks).to include("google website")
     end
   end
+
+  describe '.create' do
+    it 'creates a new bookmark' do
+      bookmark = Bookmark.create(url: 'http://www.example.org', title: 'Test Bookmark').first
+
+      expect(bookmark['url']).to eq 'http://www.example.org'
+      expect(bookmark['title']).to eq 'Test Bookmark'
+    end
+  end
 end
