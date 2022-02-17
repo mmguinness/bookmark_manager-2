@@ -1,4 +1,5 @@
 require 'bookmark'
+require_relative 'database_helpers'
 
 describe Bookmark do
   describe '.all' do
@@ -22,10 +23,13 @@ describe Bookmark do
 
   describe '.create' do
     it 'creates a new bookmark' do
-      bookmark = Bookmark.create(url: 'http://www.example.org', title: 'Test Bookmark').first
-
-      expect(bookmark['url']).to eq 'http://www.example.org'
-      expect(bookmark['title']).to eq 'Test Bookmark'
+      bookmark = Bookmark.create(url: 'http://www.example.org', title: 'Test Bookmark')
+      persisted_data = persisted_data(bookmark.id)
+  
+      expect(bookmark).to be_a Bookmark
+      expect(bookmark.id).to eq persisted_data['id']
+      expect(bookmark.title).to eq 'Test Bookmark'
+      expect(bookmark.url).to eq 'http://www.example.org'
     end
   end
 end
