@@ -15,7 +15,7 @@ class Bookmark
 
   end
 
-	def self.create(bookmark)
+	def self.create(url, title)
 
 		if ENV['RACK_ENV'] == 'test'
 			conn = PG.connect( dbname: 'bookmark_manager_test' ) 
@@ -23,7 +23,8 @@ class Bookmark
     	conn = PG.connect( dbname: 'bookmark_manager' ) 
 		end
 
-    conn.exec("INSERT INTO bookmarks (url) VALUES ('#{bookmark}');")
+    conn.exec("INSERT INTO bookmarks (url) VALUES ('#{url}');")
+		conn.exec("INSERT INTO bookmarks (title) VALUES ('#{title}');")
 	end
 
 end
