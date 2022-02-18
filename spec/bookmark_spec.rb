@@ -33,3 +33,13 @@ describe Bookmark do
     end
   end
 end
+
+describe '.delete' do
+  it 'deletes a bookmark' do
+    bookmark = Bookmark.create(url: 'http://www.example.org', title: 'Test Bookmark')
+    persisted_data = persisted_data(bookmark.id)
+    expect(bookmark.title).to eq 'Test Bookmark'
+    bookmark.delete('Test Bookmark')
+    expect(bookmark.title).to eq nil
+  end
+end

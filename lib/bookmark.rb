@@ -29,8 +29,17 @@ class Bookmark
     	conn = PG.connect( dbname: 'bookmark_manager' ) 
 		end
 
-    result = conn.exec("INSERT INTO bookmarks (title, url) VALUES('#{title}', '#{url}') RETURNING id, url, title")
-		Bookmark.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
+	# 	a hash of the form:
+	# 	{:value  => String (value of bind parameter)
+	# 	 :type   => Integer (oid of type of bind parameter)
+	# 	 :format => Integer (0 for text, 1 for binary)
+	# 	}
+	# or, it may be a String. If it is a string, that is equivalent to the hash:
+	# 	{ :value => <string value>, :type => 0, :format => 0 }
+
+
+    result = conn.exec_params("INSERT INTO bookmarks (title, url) VALUES($1, $2) RETURNING id, url, title;", [title, url])
+		Bookmark.new(id: result[0]['id'], url: result[0]['url'], title: result[0]['title'])
 	end
 
 end
